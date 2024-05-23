@@ -4,11 +4,11 @@ export async function findUserByEmail(email: string){
     return await User.findOne({ email });
 }
 
-export async function saveUser(username:string,email:string,hashedPassword:string){
+export async function saveUser(userName:string,email:string,hashedPassword:string){
     // Create a new user document
     const newUser = new User({
-        username,
-        email,
+        userName:userName,
+        email:email,
         password: hashedPassword,
     });
 

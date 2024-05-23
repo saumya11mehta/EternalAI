@@ -8,10 +8,12 @@ const SignUp: React.FC = () => {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 	const router = useRouter();
 
 	const handleSignUp = async () => {
 		try {
+			setErrorMessage('')
 			const response = await fetch('/api/signup', { // Adjust this endpoint to match your actual signup endpoint
 				method: 'POST',
 				headers: {
@@ -19,14 +21,13 @@ const SignUp: React.FC = () => {
 				},
 				body: JSON.stringify({ username, email, password }),
 			});
-
+			const reply = await response.json();
 			if (response.ok) {
-				const data = await response.json();
-				localStorage.setItem('userId', data.userId); // Save user ID to local storage
+				localStorage.setItem('userId', reply.userId); // Save user ID to local storage
 				router.push('/'); // Redirect to homepage
-			} else {
-				// Handle sign-up failure
-				console.error('Sign-up failed');
+			}
+			if(reply.error) {
+				setErrorMessage(reply.error);
 			}
 		} catch (error) {
 			console.error('Error occurred during sign-up:', error);
@@ -51,7 +52,7 @@ const SignUp: React.FC = () => {
 							id="username"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							className={(errorMessage != '' ? "border-red-500 focus:ring-red-500 " : "border-gray-600 focus:ring-gray-400 focus:border-gray-400 ") + "bg-gray-700 border  text-white text-sm rounded-lg outline-0  placeholder-gray-400 block w-full p-2.5"}
 							placeholder="Username"
 							required
 						/>
@@ -66,7 +67,7 @@ const SignUp: React.FC = () => {
 							id="email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							className={(errorMessage != '' ? "border-red-500 focus:ring-red-500 " : "border-gray-600 focus:ring-gray-400 focus:border-gray-400 ") + "bg-gray-700 border  text-white text-sm rounded-lg outline-0  placeholder-gray-400 block w-full p-2.5"}
 							placeholder="Email"
 							required
 						/>
@@ -81,7 +82,7 @@ const SignUp: React.FC = () => {
 							id="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							className={(errorMessage != '' ? "border-red-500 focus:ring-red-500 " : "border-gray-600 focus:ring-gray-400 focus:border-gray-400 ") + "bg-gray-700 border  text-white text-sm rounded-lg outline-0  placeholder-gray-400 block w-full p-2.5"}
 							placeholder="Password"
 							required
 						/>

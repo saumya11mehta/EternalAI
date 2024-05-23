@@ -23,8 +23,7 @@ const Login: React.FC = () => {
 			});
 			const reply = await response.json();
 			if (response.ok) {
-				const data = await response.json();
-				localStorage.setItem('userId', data.userId); // Save user ID to local storage
+				localStorage.setItem('userId', reply.userId); // Save user ID to local storage
 				router.push('/'); // Redirect to homepage
 			}
 			if(reply.error) {
@@ -59,7 +58,7 @@ const Login: React.FC = () => {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							className={(errorMessage != '' ? "border-red-500 focus:ring-red-500 " : "border-gray-600 focus:ring-gray-400 focus:border-gray-400 ") + "bg-gray-700 border  text-white text-sm rounded-lg outline-0  placeholder-gray-400 block w-full p-2.5"}
-							placeholder="Email or username"
+							placeholder="Email"
 							required
 						/>
 					</div>
