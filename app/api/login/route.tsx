@@ -15,14 +15,14 @@ export async function POST(request: Request) {
       const user = await findUserByEmail(email)
 
       if (!user) {
-        return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+        return NextResponse.json({ error: 'Invalid Email or Username' }, { status: 401 });
       }
 
       // Compare hashed password from the database with the provided password
       const isPasswordMatch = await bcrypt.compare(password, user.password);
 
       if (!isPasswordMatch) {
-        return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+        return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
       }
 
       // Passwords match, login successful

@@ -7,10 +7,12 @@ import { useRouter } from 'next/navigation';
 const Login: React.FC = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 	const router = useRouter();
 
 	const handleLogin = async () => {
 		try {
+			setErrorMessage('')
 			// Make a POST request to your API endpoint
 			const response = await fetch('/api/login', {
 				method: 'POST',
@@ -19,13 +21,14 @@ const Login: React.FC = () => {
 				},
 				body: JSON.stringify({ email, password }), // Send email and password in the request body
 			});
-
+			const reply = await response.json();
 			if (response.ok) {
 				const data = await response.json();
 				localStorage.setItem('userId', data.userId); // Save user ID to local storage
 				router.push('/'); // Redirect to homepage
-			} else {
-				console.error('Login failed');
+			}
+			if(reply.error) {
+				setErrorMessage(reply.error);
 			}
 		} catch (error) {
 			console.error('Login failed:', error);
@@ -41,8 +44,13 @@ const Login: React.FC = () => {
 			<div className="flex flex-col items-center w-2/4 basis-full shrink-0 flex-grow bg-gray-900 border rounded-lg border-gray-900">
 				<div className="text-3xl font-bold p-10">Login for Eternal</div>
 				<div className="w-2/4 p-10">
+					{
+							errorMessage != '' && <div className="text-center p-5">
+								<p className="text-red-500 text-sm text-bold">{errorMessage}</p>
+							</div>
+					}
 					<div>
-						<label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+						<label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
 							Email
 						</label>
 						<input
@@ -50,7 +58,7 @@ const Login: React.FC = () => {
 							id="email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							className={(errorMessage != '' ? "border-red-500 focus:ring-red-500 " : "border-gray-600 focus:ring-gray-400 focus:border-gray-400 ") + "bg-gray-700 border  text-white text-sm rounded-lg outline-0  placeholder-gray-400 block w-full p-2.5"}
 							placeholder="Email or username"
 							required
 						/>
@@ -65,7 +73,7 @@ const Login: React.FC = () => {
 							id="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							className={(errorMessage != '' ? "border-red-500 focus:ring-red-500 " : "border-gray-600 focus:ring-gray-400 focus:border-gray-400 ") + "bg-gray-700 border  text-white text-sm rounded-lg outline-0  placeholder-gray-400 block w-full p-2.5"}
 							placeholder="Password"
 							required
 						/>
