@@ -79,7 +79,7 @@ const Login: React.FC = () => {
 					</div>
 					<br />
 					<div className="flex flex-col items-center justify-center">
-						<button type="button" onClick={handleLogin} className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-full group">
+						<button type="button" onClick={handleLogin} className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 w-full group">
 							<div className="flex items-center justify-center">
 								<Logo className="group-hover:rotate-45" width="35" height="35" />
 								<span className="pl-1">Login</span>
@@ -88,7 +88,7 @@ const Login: React.FC = () => {
 					</div>
 					<div className="text-white text-center my-4">Or</div>
 					<div className="flex flex-col items-center justify-center">
-						<button type="button" onClick={() => router.push('/signup')} className="text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-green-500 dark:hover:bg-green-400 dark:focus:ring-green-800 w-full group">
+						<button type="button" onClick={() => router.push('/signup')} className="text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 w-full group">
 							<div className="flex items-center justify-center">
 								<Logo className="group-hover:rotate-45" width="35" height="35" />
 								<span className="pl-1">Sign Up</span>

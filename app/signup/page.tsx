@@ -49,7 +49,7 @@ const SignUp: React.FC = () => {
 									<p className="text-red-500 text-sm text-bold">{errorMessage}</p>
 								</div>
 						}
-						<label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+						<label htmlFor="username" className="block mb-2 text-sm font-medium text-white">
 							Username
 						</label>
 						<input
@@ -64,7 +64,7 @@ const SignUp: React.FC = () => {
 					</div>
 					<br />
 					<div>
-						<label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+						<label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
 							Email
 						</label>
 						<input
@@ -79,7 +79,7 @@ const SignUp: React.FC = () => {
 					</div>
 					<br />
 					<div>
-						<label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+						<label htmlFor="password" className="block mb-2 text-sm font-medium text-white">
 							Password
 						</label>
 						<input
@@ -94,7 +94,7 @@ const SignUp: React.FC = () => {
 					</div>
 					<br />
 					<div className="flex items-center justify-center">
-						<button type="button" onClick={handleSignUp} className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-full">
+						<button type="button" onClick={handleSignUp} className="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 w-full">
 							<div className="flex items-center justify-center">
 								<Logo width="35" height="35" />
 								<span className="pl-1">Sign Up</span>
@@ -103,7 +103,7 @@ const SignUp: React.FC = () => {
 					</div>
 					<div className="text-white text-center my-4">Or</div>
 					<div className="flex flex-col items-center justify-center">
-						<button type="button" onClick={() => router.push('/login')} className="text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 dark:bg-green-500 dark:hover:bg-green-400 dark:focus:ring-green-800 w-full group">
+						<button type="button" onClick={() => router.push('/login')} className="text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2 w-full group">
 							<div className="flex items-center justify-center">
 								<Logo className="group-hover:rotate-45" width="35" height="35" />
 								<span className="pl-1">Login</span>
