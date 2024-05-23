@@ -49,7 +49,7 @@ const Login: React.FC = () => {
 							</div>
 					}
 					<div>
-						<label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
+						<label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
 							Email
 						</label>
 						<input
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
 					</div>
 					<br />
 					<div>
-						<label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+						<label htmlFor="password" className="block mb-2 text-sm font-medium text-white">
 							Password
 						</label>
 						<input

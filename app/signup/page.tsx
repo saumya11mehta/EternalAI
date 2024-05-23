@@ -44,6 +44,11 @@ const SignUp: React.FC = () => {
 				<div className="text-3xl font-bold p-10">Sign up for Eternal</div>
 				<div className="w-2/4 p-10">
 					<div>
+						{
+								errorMessage != '' && <div className="text-center p-5">
+									<p className="text-red-500 text-sm text-bold">{errorMessage}</p>
+								</div>
+						}
 						<label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
 							Username
 						</label>
