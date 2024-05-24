@@ -1,5 +1,5 @@
 import Logo from '@/image/logo/Logo';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import MarkdownView from 'react-showdown';
 import ChatHistory from '@/components/chat_history/ChatHistory';
 import EmptyChat from '@/components/chat/EmptyChat';
@@ -27,6 +27,7 @@ const Chat = ({userId} : ChatProps) => {
 	const [historyKey, setHistoryKey] = useState<number>(1);
 	const [isMobile, setIsMobile] = useState(false);
 	const [showChatHistory, setShowChatHistory] = useState(true);
+	const bottomRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const userAgent = navigator.userAgent;
@@ -55,10 +56,14 @@ const Chat = ({userId} : ChatProps) => {
 			const data = await response.json();
 			setChatId(data.chatId);
 			setMessages(data.messages);
+			setTimeout(()=>scrollToBottom(),5000);
 		} catch (error) {
 			console.error('Error fetching messages:', error);
 		}
 	};
+	const scrollToBottom = ()=>{
+		bottomRef.current?.scrollIntoView();
+	}
 
 	const sendMessage = async () => {
 		if (!inputValue.trim()) return;
@@ -86,6 +91,7 @@ const Chat = ({userId} : ChatProps) => {
 					const modelMessage:ChatMessage = { messageBy: "model", messageContent: modelResponse, timestamp: new Date(),chatId:chatId?chatId:""};
 					setChatId(reply.chatId);
 					setMessages([...messages,userMessage, modelMessage]); // Update UI with sent message
+					setTimeout(()=>scrollToBottom(),5000);
 				}
 			} else {
 				console.error('Failed to get reponse');
@@ -115,7 +121,7 @@ const Chat = ({userId} : ChatProps) => {
 								{
 									messages.map((message, index) => (
 										<div key={index} className={`flex ${message.messageBy === "model"? "justify-start":"justify-end"}`}>
-											<div className={`${message.messageBy === "model"? "bg-purple-400":"bg-gray-700"} text-white rounded-lg px-4 py-2 max-w-lg sm:w-full ${index>0? " mt-3 ":""})`}>
+											<div className={`${message.messageBy === "model"? "bg-purple-400":"bg-gray-700"} text-white rounded-lg [&>p]:text-wrap px-4 py-2 max-w-lg sm:w-full ${index>0? " mt-3 ":""})`}>
 												<MarkdownView
 												markdown={message.messageContent}
 												options={{ tables: true, emoji: true }}
@@ -124,6 +130,7 @@ const Chat = ({userId} : ChatProps) => {
 										</div>
 									))
 								}
+								<div className="h-0 w-0" ref={bottomRef} />
 							</div>
 						}
 						{

@@ -86,3 +86,28 @@ body {
 .mask{
   mask-type:alpha
 }
+
+pre > code {
+	display: block;
+	background: black;
+	padding: 1.33em;
+	border-radius: 0.33em;
+}
+
+pre:has(> code) {
+	background: black;
+	padding: 1.33em;
+	border-radius: 0.33em;
+}
+
+pre:has(code) {
+	background: black;
+	padding: 1.33em;
+	border-radius: 0.33em;
+}
+
+pre:has(code) {
+  white-space: pre-wrap;
+  tab-size: 3;
+  overflow: auto;
+}
