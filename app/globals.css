@@ -111,3 +111,9 @@ pre:has(code) {
   tab-size: 3;
   overflow: auto;
 }
+
+@media not all and (min-width: 640px) {
+  pre > code,pre:has(code), pre:has(> code) {
+    padding:0
+  }
+}
