@@ -40,9 +40,9 @@ const Login: React.FC = () => {
 				<Logo className="w-1/4 p-3" />
 				<Text className="w-1/2" />
 			</div>
-			<div className="flex flex-col items-center w-2/4 basis-full shrink-0 flex-grow bg-gray-900 border rounded-lg border-gray-900">
-				<div className="text-3xl font-bold p-10">Login for Eternal</div>
-				<div className="w-2/4 p-10">
+			<div className="flex flex-col items-center w-full sm:w-1/2 basis-full shrink-0 flex-grow bg-gray-900 border rounded-lg border-gray-900">
+				<div className="text-2xl font-bold py-5 sm:py-10 sm:text-3xl lg:p-10 ">Login</div>
+				<div className="sm:w-3/4 lg:w-1/2 p-10">
 					{
 							errorMessage != '' && <div className="text-center p-5">
 								<p className="text-red-500 text-sm text-bold">{errorMessage}</p>

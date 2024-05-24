@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import Header from '@/components/general/Header';
 import { useRouter } from 'next/navigation';
 
+
 type ChatProps = {
 	userId:string
 }
@@ -24,7 +25,17 @@ const Chat = ({userId} : ChatProps) => {
 	const [inputValue, setInputValue] = useState('');
 	const [chatId, setChatId] = useState<string | null>(null);
 	const [historyKey, setHistoryKey] = useState<number>(1);
+	const [isMobile, setIsMobile] = useState(false);
 	const [showChatHistory, setShowChatHistory] = useState(true);
+
+	useEffect(() => {
+		const userAgent = navigator.userAgent;
+		const mobile = /mobile/i.test(userAgent);
+		setIsMobile(mobile);
+		if(mobile){
+			setShowChatHistory(false);
+		}
+	}, []);
 
 	useEffect(() => {
 		if(chatId){
@@ -96,9 +107,9 @@ const Chat = ({userId} : ChatProps) => {
 		<>
 			<Header showChatHistory={showChatHistory} setShowChatHistory={setShowChatHistory} handleLogout={handleLogout} />
 			<div className="flex flex-col h-[calc(100vh-10vh)]">
-				<div className="flex-grow flex-wrap grid grid-cols-6 min-h-0 m-4">
+				<div className="flex-grow flex-wrap grid max-sm:grid-flow-row sm:grid-flow-col lg:grid-cols-6 min-h-0 m-4">
 					{ showChatHistory && <ChatHistory key={historyKey} userId={userId} updateChatId={updateChatId}/>}
-					<div className={(showChatHistory?"col-span-5":"col-span-6") +" flex flex-col h-full basis-0 justify-end px-6 py-8 space-y-4 overflow-auto"}>
+					<div className={(showChatHistory?" max-sm:hidden lg:col-span-5":"lg:col-span-6") +" flex flex-col h-full basis-0 justify-end px-6 py-8 space-y-4 overflow-auto"}>
 						{
 							messages.length>0 && <div className='h-full'>
 								{
@@ -120,7 +131,7 @@ const Chat = ({userId} : ChatProps) => {
 						}
 					</div>
 				</div>
-				<div className="flex p-4 justify-center">
+				<div className={(showChatHistory?" max-sm:hidden":"")+" flex p-4 justify-center"}>
 					<div className="flex sm:w-full lg:basis-1/2">
 						<div className="w-full grid grid-cols-4 auto-rows-fr justify-center items-center rounded-3xl p-1 bg-gradient-to-r from-violet-600 to-purple-500 mb-2">
 							<textarea
