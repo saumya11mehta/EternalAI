@@ -115,7 +115,7 @@ const Chat = ({userId} : ChatProps) => {
 								{
 									messages.map((message, index) => (
 										<div key={index} className={`flex ${message.messageBy === "model"? "justify-start":"justify-end"}`}>
-											<div className={`${message.messageBy === "model"? "bg-purple-400":"bg-gray-700"} text-white rounded-lg px-4 py-2 max-w-lg sm:w-full`}>
+											<div className={`${message.messageBy === "model"? "bg-purple-400":"bg-gray-700"} text-white rounded-lg px-4 py-2 max-w-lg sm:w-full ${index>0? " mt-3 ":""})`}>
 												<MarkdownView
 												markdown={message.messageContent}
 												options={{ tables: true, emoji: true }}
