@@ -94,6 +94,7 @@ const Chat = ({userId} : ChatProps) => {
 					setTimeout(()=>scrollToBottom(),5000);
 				}
 			} else {
+				toast("Response Timed Out. Maybe try a different question?");
 				console.error('Failed to get reponse');
 			}
 		} catch (error) {
