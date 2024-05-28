@@ -98,7 +98,9 @@ const Chat = ({userId} : ChatProps) => {
 				console.error('Failed to get reponse');
 			}
 		} catch (error) {
-			console.error('Error sending message:', error);
+			toast("Response Timed Out. Maybe try a different question?");
+			console.error("Error Sending Message:");
+			console.error(error);
 		}
 	};
 
