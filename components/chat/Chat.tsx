@@ -65,7 +65,7 @@ const Chat = ({userId} : ChatProps) => {
 		bottomRef.current?.scrollIntoView();
 	}
 
-	const sendMessage = async () => {
+	const sendMessage = async (chatId:string|null) => {
 		if (!inputValue.trim()) return;
 		const userMessage:ChatMessage = { messageBy: "user", messageContent: inputValue, timestamp: new Date(),chatId:chatId?chatId:""}; // Create message object
 		setMessages([...messages, userMessage]); // Update UI with sent message
@@ -152,7 +152,7 @@ const Chat = ({userId} : ChatProps) => {
 							className="col-span-3 rounded-l-[calc(1.5rem-0.25rem)] bg-black p-2 focus:outline-none w-full resize-none"
 							/>
 							<div className="flex rounded-r-[calc(1.5rem-0.25rem)] justify-end items-center bg-black rounded rounded-l-none border-0 px-4 font-bold h-full">
-								<button onClick={sendMessage} className="bg-purple-500 rounded-3xl text-white p-2 flex justify-center items-center">
+								<button onClick={()=>sendMessage(chatId)} className="bg-purple-500 rounded-3xl text-white p-2 flex justify-center items-center">
 									<Logo width="35" height="35"/>
 								</button>
 							</div>
