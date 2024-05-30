@@ -69,9 +69,6 @@ const Chat = ({userId} : ChatProps) => {
 		if (!inputValue.trim()) return;
 		const userMessage:ChatMessage = { messageBy: "user", messageContent: inputValue, timestamp: new Date(),chatId:chatId?chatId:""}; // Create message object
 		setMessages([...messages, userMessage]); // Update UI with sent message
-		if(chatId==null){
-			setHistoryKey(historyKey+1);
-		}
 		setInputValue('');
 		try {
 			const response = await fetch('/api/send-message', {
@@ -89,6 +86,9 @@ const Chat = ({userId} : ChatProps) => {
 				if(reply.modelResponse){
 					const modelResponse = await reply.modelResponse as string;
 					const modelMessage:ChatMessage = { messageBy: "model", messageContent: modelResponse, timestamp: new Date(),chatId:chatId?chatId:""};
+					if(chatId==null){
+						setHistoryKey(historyKey+1);
+					}
 					setChatId(reply.chatId);
 					setMessages([...messages,userMessage, modelMessage]); // Update UI with sent message
 					setTimeout(()=>scrollToBottom(),5000);
