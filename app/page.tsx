@@ -1,28 +1,17 @@
 "use client";
 
-import { ToastContainer,Bounce } from "react-toastify";
-import HomeMain from "./home/main";
+import ToastProvider from "@/lib/react-toastify/ToastProvider";
+import HomeMain from "@/app/home/main";
 
 export default function Home() {
 
   return (
     <>
+      <ToastProvider>
         <section className="flex flex-col justify-between">
             <HomeMain/>
         </section>
-        <ToastContainer 
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-            transition = {Bounce}
-            />
+      </ToastProvider>
     </>
   )
 }
